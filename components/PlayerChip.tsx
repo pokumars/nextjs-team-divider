@@ -13,12 +13,12 @@ export default function PlayerChip({ player, onClickDelete }: PlayerListChipProp
   const skillTierNum = player[1];
 
   return (
-    <div className='border-solid border-2 border-sky-500 hover:border-dashed m-1 inline-flex px-5 rounded-full ' >
+    <div className='border-solid border-2 border-sky-500 hover:border-dashed m-1 inline-flex pl-5 pr-2 rounded-full ' >
       <span className='mr-2'>
         <span className='block'>{player[0]}</span>
         <span className='block italic text-sm'>{skillTierNames[skillTierNum]}</span>
       </span>
-      <IconButton aria-label="delete" onClick={() => onClickDelete(player)}>
+      <IconButton aria-label="delete" onClick={() => onClickDelete(player)} color='error' >
         <DeleteIcon />
       </IconButton>
     </div>

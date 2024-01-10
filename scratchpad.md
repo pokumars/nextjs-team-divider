@@ -10,6 +10,8 @@ portions of the page
     - form team btn
     - copy teams icon btn
     - team jersey colors based on the round android emoji 🔵🔴⚪⚫🟢🟡🟠🟣
+  - Player pool - Optional
+    -  a list of those that are partof our group. they are the ones who may or may not be joining for this session. They can be added to players from which teams can then be made.
 
 validation for number of teams
 - num of teams cant exceed num of players
@@ -22,3 +24,17 @@ NB: if you have only 1 player for some skill leves, there is a high likelyhood t
 list with name and then skill level.
 skill level will be shown under name in smaller text.
 Text is based on some enum
+
+USER Stories
+AS a user
+- I want to add players
+- I want to know how many players have been added
+- I want to have the player pool saved for next time so i dont always have to add it
+- I want to have a bigger pool of player out of which I can select whop is coming to join today's session
+- I want to be able to search from the big pool players to add to today's session instead of manually/by eye ball finding them to add to those who are coming to today's session
+- I want to shuffle the players for todays session into random teams
+- I want to copy paste the teams with their shirt colors so i can paste them into our whatspp chat
+- I want to be able to manually modify the teams even after it has been auto-generated
+- I want to view what the relative strength of each team is (the sum of their skill levels)
+- i want to select a bunch of players and bulk-modify their skill level + or -
+- I want to decide what are the elements that get copied when I click the copy button - team name, shirt color, relative team strength

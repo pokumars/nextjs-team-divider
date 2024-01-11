@@ -17,7 +17,7 @@ export default function PlayersSection(props: PlayersComponentProps) {
       ? <p>No players added.</p>
       : (<div className='border-solid border-2 border-orange-300 rounded-lg p-5 m-5'>
         <div>{registeredPlayers.map(
-          (p) => <PlayerChip key={`${p[0]}${p[1]}`} player={p} onClickDelete={onClickDelete}/>)}
+          (p) => <PlayerChip key={`${p.name}${p.skillTier}`} player={p} onClickDelete={onClickDelete}/>)}
         </div>
         <div className=''> <p className='text-right' >Registered players: {registeredPlayers.length}</p> </div>
       </div>);

@@ -7,8 +7,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import { Unstable_NumberInput as NumberInput } from '@mui/base';
 import NumericTextField from './NumericTextField';
+import { FormControl } from '@mui/material';
 
 
 export default function AddPlayerDialog() {
@@ -34,32 +34,27 @@ export default function AddPlayerDialog() {
           <DialogContentText>
             Add player name and their skill level relative to other players. Higher number is higher skill level.
           </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Name"
-            type="text"
-            fullWidth
-            variant="standard"
-          />
-          <NumberInput
-            aria-label="Demo number input"
-            placeholder="Type a number…"
-            value={value}
-            onChange={(event, val) => setValue(val)}
-          />
-          <TextField
+          <FormControl className='block' >
+            <TextField
+              autoFocus
+              margin="dense"
+              id="player-name"
+              label="Player name"
+              type="text"
+              variant="outlined"
+              
+            // https://technology.blog.gov.uk/2020/02/24/why-the-gov-uk-design-system-team-changed-the-input-type-for-numbers/
+            />
+          </FormControl>
+
+
+          <NumericTextField 
+            name='skill-level'
             autoFocus
             margin="dense"
             id="skill-level"
             label="Skill Level"
-            type="text"
-            fullWidth
-            variant="standard"
-            // https://technology.blog.gov.uk/2020/02/24/why-the-gov-uk-design-system-team-changed-the-input-type-for-numbers/
           />
-          <NumericTextField name='skill-level' />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

@@ -1,0 +1,1 @@
+export type GameConfig = { numOfTiers: number, numOfTeams: number }

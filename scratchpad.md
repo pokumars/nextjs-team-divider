@@ -11,14 +11,15 @@ portions of the page
     - copy teams icon btn
     - team jersey colors based on the round android emoji 🔵🔴⚪⚫🟢🟡🟠🟣
   - Player pool - Optional
-    -  a list of those that are partof our group. they are the ones who may or may not be joining for this session. They can be added to players from which teams can then be made.
+    -  a list of those that are part of our group. they are the ones who may or may not be joining for this session. They can be added to players from which teams can then be made.
 
 validation for number of teams
 - num of teams cant exceed num of players
-- OPTIONAL- e.g. if there are supposed to be 5 teams of 2 but only 7 players then some kinda math that makes everyon into 2 teams with most/all being in more than 1 team. Perhaps by duplicating everyone so that they show up 2x in the array.
+- OPTIONAL- e.g. if there are supposed to be 5 teams of 2 but only 7 players then some kinda math that makes everyone into 2 teams with most/all being in more than 1 team. Perhaps by duplicating everyone so that they show up 2x in the array.
+- when the teams have been formed and the user changes the number of teams/ the value changes to becoming invalid, clear the formed teams (but leave the player pool)
 
 
-NB: if you have only 1 player for some skill leves, there is a high likelyhood that the randomness will not have any effect on them.
+NB: if you have only 1 player for some skill level, there is a high likelyhood that the randomness will not have any effect on them.
 
 
 list with name and then skill level.
@@ -38,3 +39,4 @@ AS a user
 - I want to view what the relative strength of each team is (the sum of their skill levels)
 - i want to select a bunch of players and bulk-modify their skill level + or -
 - I want to decide what are the elements that get copied when I click the copy button - team name, shirt color, relative team strength
+- 

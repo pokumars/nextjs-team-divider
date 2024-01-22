@@ -1,5 +1,7 @@
 import { Player } from '@/types/Player';
 
+export const MAX_SKILL_TIER = 7;
+
 export const testPlayers: Player[]= [{ name: 'Pasi',  skillTier: 4 },
   { name: 'Hung',  skillTier: 1 },
   { name: 'Hung',  skillTier: 2 },

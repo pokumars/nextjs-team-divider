@@ -1,4 +1,6 @@
-import { GameConfig } from '@/types/GameConfig';
+import NumericTextField from '@/components/NumericTextField';
+import { GameConfig, GameConfigErrors } from '@/types/GameConfig';
+import { FormControl, TextField } from '@mui/material';
 import React, { useState } from 'react';
 
 interface GameConfigProps { 
@@ -7,39 +9,57 @@ interface GameConfigProps {
   // onChangeNumTeams: (e:any) => void;
   // onChangeNumTiers: (e: any) => void;
   gameConfigValues: GameConfig
-  onChangeGameConfigValues: (fieldName: keyof GameConfig, value: any) => void
+  gameConfigErrors: GameConfigErrors
+  onChangeGameConfigValues: (fieldName: string, value: any) => void
  }
 
 export default function GameConfigSection(props: GameConfigProps) {
-  const { gameConfigValues, onChangeGameConfigValues } = props;
+  const { gameConfigValues, onChangeGameConfigValues, gameConfigErrors } = props;
 
   const handleBlur = () => {
-    console.log();
+    console.log('handleBlur');
   };
 
   return (
     <div>
       <h2>How is the session going to be like?</h2>
       <p> How many teams? how many different tiers of skill do you want to use to divide the teams by. </p>
+      
+      <div>
+        <div className="sm:w-full md:w-1/4" >
+          <NumericTextField
+            autoFocus
+            margin="dense"
+            id="numOfTeams"
+            name='numOfTeams'
+            label="Number of teams"
+            type="text"
+            required
+            isValid={gameConfigErrors.numOfTeams}
+            errorMessage={gameConfigErrors.numOfTeamsErrMsg}
+            value={gameConfigValues.numOfTeams}
+            customOnChange={onChangeGameConfigValues}
+            fullWidth
+          />
+        </div>
 
-      <form>
-        <div className="sm:w-full md:w-2/3">
-          <label className=" text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" >
-        Number of teams:
-          </label>
-          <input onBlur={handleBlur} className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-32 py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-purple-500"
-            id="inline-full-name" type="text" value={gameConfigValues.numOfTeams} onChange={e => onChangeGameConfigValues('numOfTeams', e.target.value)}/>
+        <div className="sm:w-full md:w-1/4">
+          <NumericTextField 
+            autoFocus
+            margin="dense"
+            id="numOfTiers"
+            name='numOfTiers'
+            label="Number of tiers"
+            isValid={gameConfigErrors.numOfTiers}
+            errorMessage={gameConfigErrors.numOfTiersErrMsg}
+            value={gameConfigValues.numOfTiers}
+            required
+            fullWidth
+            customOnChange={onChangeGameConfigValues}
+          />
         </div>
-        <div className="sm:w-full md:w-2/3">
-          <label className=" text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" >
-        Number of tiers/ skill levels:
-          </label>
-          <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-32 py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-purple-500"
-            id="inline-full-name" type="text"value={gameConfigValues.numOfTiers} onChange={e => onChangeGameConfigValues('numOfTiers', e.target.value)}/>
-        </div>
-      </form>
+      </div>
     </div>
 
   );
 }
-

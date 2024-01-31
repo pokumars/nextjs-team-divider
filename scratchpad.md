@@ -16,7 +16,7 @@ portions of the page
 validation for number of teams
 - num of teams cant exceed num of players
 - OPTIONAL- e.g. if there are supposed to be 5 teams of 2 but only 7 players then some kinda math that makes everyone into 2 teams with most/all being in more than 1 team. Perhaps by duplicating everyone so that they show up 2x in the array.
-- when the teams have been formed and the user changes the number of teams/ the value changes to becoming invalid, clear the formed teams (but leave the player pool)
+- when the teams have been formed and the user changes the number of teams/ the value changes to becoming invalid, clear the formed teams (but leave the player pool). Move all the players that have been placed in teams back into the session's pool.
 
 
 NB: if you have only 1 player for some skill level, there is a high likelyhood that the randomness will not have any effect on them.

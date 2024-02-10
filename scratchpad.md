@@ -40,3 +40,10 @@ AS a user
 - i want to select a bunch of players and bulk-modify their skill level + or -
 - I want to decide what are the elements that get copied when I click the copy button - team name, shirt color, relative team strength
 - 
+
+
+What was I working on PlayersSection. delete -> modify dialog 
+remake dialog
+later (-> add dialog)
+
+then when you find the commonality between the 2 you make them share that common component

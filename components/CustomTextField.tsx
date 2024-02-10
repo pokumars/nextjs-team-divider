@@ -7,7 +7,7 @@ interface NumericTextFieldProps extends StandardTextFieldProps {
   customOnChange:  (fieldName: string, value: any) => void
 }
 
-export default function NumericTextField(props: NumericTextFieldProps) {
+export default function CustomTextField(props: NumericTextFieldProps) {
   const { name, onChange, errorMessage, isValid, customOnChange, ...rest } = props;
 
   const [value, setValue] = React.useState('');
@@ -27,7 +27,6 @@ export default function NumericTextField(props: NumericTextFieldProps) {
       helperText= {errorMessage}
       error={!isValid}
       {...rest}
-      type='number'
       
     />
   );

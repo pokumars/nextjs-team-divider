@@ -1,3 +1,4 @@
+import CustomTextField from '@/components/CustomTextField';
 import NumericTextField from '@/components/NumericTextField';
 import { GameConfig, GameConfigErrors } from '@/types/GameConfig';
 import { FormControl, TextField } from '@mui/material';
@@ -27,29 +28,31 @@ export default function GameConfigSection(props: GameConfigProps) {
       
       <div>
         <div className="sm:w-full md:w-1/4" >
-          <NumericTextField
+          <CustomTextField
             autoFocus
             margin="dense"
             id="numOfTeams"
             name='numOfTeams'
             label="Number of teams"
-            type="text"
+            type="number"
             required
             isValid={gameConfigErrors.numOfTeams}
             errorMessage={gameConfigErrors.numOfTeamsErrMsg}
             value={gameConfigValues.numOfTeams}
             customOnChange={onChangeGameConfigValues}
             fullWidth
+          
           />
         </div>
 
         <div className="sm:w-full md:w-1/4">
-          <NumericTextField 
+          <CustomTextField 
             autoFocus
             margin="dense"
             id="numOfTiers"
             name='numOfTiers'
             label="Number of tiers"
+            type="number"
             isValid={gameConfigErrors.numOfTiers}
             errorMessage={gameConfigErrors.numOfTiersErrMsg}
             value={gameConfigValues.numOfTiers}

@@ -7,20 +7,22 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import NumericTextField from './NumericTextField';
 import { FormControl } from '@mui/material';
 
+export interface AddPlayerDialogProps {
+  open: boolean;
+  selectedValue: string;
+  onClose: (value: string) => void;
+}
 
-export default function AddPlayerDialog() {
-  const [open, setOpen] = React.useState(false);
+export default function AddPlayerDialog(props: AddPlayerDialogProps) {
+  const { open } = props;
   const [value, setValue] = React.useState<number | undefined>(1);
   
   const handleClickOpen = () => {
-    setOpen(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
   };
 
   return (
@@ -47,14 +49,16 @@ export default function AddPlayerDialog() {
             />
           </FormControl>
 
+          <FormControl>
+            <TextField 
+              name='skill-level'
+              autoFocus
+              margin="dense"
+              id="skill-level"
+              label="Skill Level"
+            />
+          </FormControl>
 
-          <NumericTextField 
-            name='skill-level'
-            autoFocus
-            margin="dense"
-            id="skill-level"
-            label="Skill Level"
-          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

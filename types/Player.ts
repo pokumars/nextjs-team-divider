@@ -1,5 +1,4 @@
-// is there a reason to use a tuple instea dof an object?
-export type Player = {name: string, skillTier: number}
+export type Player = {name: string, skillTier: number, id: string}
 
 export const skillTierNames: 
   {[key: number]: string} = {

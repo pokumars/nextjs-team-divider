@@ -22,9 +22,11 @@ export default function PlayersSection(props: PlayersComponentProps) {
     ));
   };
 
-  const handlePlayerModify = (player: Player) => {
+  const handlePlayerModify = (p: Player) => {
     //when you click on the player chip. Opens dialog for player modification
-    console.log('clicked player ', player);
+    console.log('clicked player ', p);
+    const modifiedRegisteredPlayerArray = registeredPlayers.map((rp) => rp.id === p.id ? p : rp);
+    setRegisteredPlayers(modifiedRegisteredPlayerArray);
   };
 
   const handlePlayerAdd = (player: Player) => {

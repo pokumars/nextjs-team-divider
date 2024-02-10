@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button, IconButton, Typography } from '@mui/material';
 import ModifyPlayerDialog from './ModifyPlayerDialog';
-import { emails } from '@/utils/constants';
 
 interface PlayerListChipProps {
   player: Player;
@@ -13,16 +12,15 @@ interface PlayerListChipProps {
 
 export default function PlayerChip({ player, onClickDelete, onModifyPlayer }: PlayerListChipProps) {
   const [open, setOpen] = React.useState(false);
-  const [selectedValue, setSelectedValue] = React.useState<Player>(player);
   
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = (player: Player) => {
+  const handleClose = (p?: Player) => {
     setOpen(false);
-    setSelectedValue(player);
+    p && onModifyPlayer(p);
   };
 
   // To make a div accessible as a button, you make it possble to navigate to it by tab using the 
@@ -39,7 +37,7 @@ export default function PlayerChip({ player, onClickDelete, onModifyPlayer }: Pl
       </IconButton>
     </div>
     <ModifyPlayerDialog 
-      player={selectedValue}
+      player={player}
       open={open}
       onClose={handleClose}/>
 

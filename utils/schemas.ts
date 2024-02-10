@@ -13,7 +13,7 @@ export const generateGameConfigSchema = (maxNumberOfTeams: number= MAX_SKILL_TIE
 
 export const generatePlayerConfigSchema = (maxSkilltiers: number= MAX_SKILL_TIER): ObjectSchema<Player> => {
   return object({
-    name: string().required(),
+    name: string().required().min(2),
     skillTier: number().required().positive().integer().min(1).max(maxSkilltiers),
     id: string().required(),
   });

@@ -1,16 +1,23 @@
 import { Player, skillTierNames } from '@/types/Player';
 import React, { useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+import CloseIcon from '@mui/icons-material/Close';
 import { Button, IconButton, Typography } from '@mui/material';
 import ModifyPlayerDialog from './ModifyPlayerDialog';
 
 interface PlayerListChipProps {
   player: Player;
-  onClickDelete: (p:Player) => void;
+  /** Optional: delete player*/
+  onClickDelete?: (p:Player) => void;
+  /** Optional: remove player from the upcoming session*/
+  onClickRemove?: (p:Player) => void;
+  /** Optional: Add player to the upcoming session*/
+  onClickComingToSession?: (p:Player) => void;
   onModifyPlayer: (p:Player) => void;
 }
 
-export default function PlayerChip({ player, onClickDelete, onModifyPlayer }: PlayerListChipProps) {
+export default function PlayerChip({ player, onClickDelete, onModifyPlayer, onClickComingToSession, onClickRemove }: PlayerListChipProps) {
   const [open, setOpen] = React.useState(false);
   
 
@@ -23,6 +30,30 @@ export default function PlayerChip({ player, onClickDelete, onModifyPlayer }: Pl
     p && onModifyPlayer(p);
   };
 
+  const renderDeleteIconButton = () => {
+    return (
+      <IconButton aria-label="delete" onClick={() => onClickDelete && onClickDelete(player)} color='error' >
+        <DeleteIcon />
+      </IconButton>
+    );
+  };
+
+  const renderAddIconButton = () => {
+    return (
+      <IconButton aria-label="delete" onClick={() => onClickComingToSession && onClickComingToSession(player)} color='default' >
+        <PersonAddAltIcon />
+      </IconButton>
+    );
+  };
+
+  const renderRemoveIconButton = () => {
+    return (
+      <IconButton aria-label="delete" onClick={() => onClickRemove && onClickRemove(player)} color='info' >
+        <CloseIcon />
+      </IconButton>
+    );
+  };
+
   // To make a div accessible as a button, you make it possble to navigate to it by tab using the 
   // tabIndex, give it  role of button. Because the Enter and Space keys are expected to fire the onClick event 
   // for an accessible button, we need to add the functionality that hitting either key triggers the button. 
@@ -32,9 +63,10 @@ export default function PlayerChip({ player, onClickDelete, onModifyPlayer }: Pl
         <span className='block'>{player.name}</span>
         <span className='block italic text-sm'>{skillTierNames[player.skillTier]}</span>
       </span>
-      <IconButton aria-label="delete" onClick={() => onClickDelete(player)} color='error' >
-        <DeleteIcon />
-      </IconButton>
+      {onClickDelete && renderDeleteIconButton()}
+      {onClickComingToSession && renderAddIconButton()}
+      {onClickRemove && renderRemoveIconButton()}
+
     </div>
     <ModifyPlayerDialog 
       player={player}

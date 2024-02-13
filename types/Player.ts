@@ -1,4 +1,4 @@
-export type Player = {name: string, skillTier: number, id: string}
+export type Player = {name: string, skillTier: number, id: string, comingToSession: boolean}
 
 export const skillTierNames: 
   {[key: number]: string} = {

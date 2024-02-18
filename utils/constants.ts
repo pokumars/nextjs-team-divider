@@ -25,3 +25,6 @@ export const testPlayers: Player[]= [
   { name: 'Kofi', skillTier: 3, id: '5d33eeb2-2ea1-4634-bfc4-3fa918fd2b85', comingToSession: false },
   { name: 'Kofi', skillTier: 4, id: '6ae03601-b226-4382-872a-b63974ae9327', comingToSession: false  }
 ];
+
+
+export const teamNames = ['black ⚫',' white ⚪', 'blue 🔵', 'red 🔴', 'green 🟢', 'yellow 🟡', 'orange 🟠', 'purple 🟣', 'pink', 'brown'];

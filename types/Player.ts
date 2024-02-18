@@ -13,3 +13,6 @@ export const skillTierNames:
     9: 'Level 9',
     10: 'Level 10'
   }; 
+
+export type Team = {teamName: string, teamPlayers : Player[], teamStrength: number }
+export type Teams = Team[]

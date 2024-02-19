@@ -16,7 +16,7 @@ export default function CustomTextField(props: NumericTextFieldProps) {
   const handleOnChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setValue(event.target.value);
 
-    if (customOnChange) customOnChange(name || '', event.target.value);
+    if (customOnChange) customOnChange(name || '---', event.target.value);
   };
 
   return (

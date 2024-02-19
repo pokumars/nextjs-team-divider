@@ -1,8 +1,12 @@
-import { Player, skillTierNames } from '@/types/Player';
+import { Player, Teams, skillTierNames } from '@/types/Player';
 import React, { useState } from 'react';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import PlayerChip from '../components/PlayerChip';
 import AddPlayerDialog from '../components/AddPlayerDialog';
 import { testPlayers } from '@/utils/constants';
+import { Button } from '@mui/material';
+import { formulateTeams } from '@/utils/functions';
+import { AllTeamsView } from '@/components/AllTeamsView';
 
 interface PlayersComponentProps {
   numOfTiers: number;
@@ -14,7 +18,8 @@ interface PlayersComponentProps {
 export default function PlayersSection(props: PlayersComponentProps) {
   const { numOfTiers, numOfTeams } = props;
   const [addPlayerDialogOpen, setAddPlayerDialogOpen] = React.useState<boolean>(false);
-  const [registeredPlayers, setRegisteredPlayers] = useState<Array<Player>>(testPlayers);
+  const [registeredPlayers, setRegisteredPlayers] = React.useState<Array<Player>>(testPlayers);
+  const [generatedTeam, setGeneratedTeam] = React.useState<Teams>([]);
 
   const handlePlayerDelete = (playerToBeDeleted: Player) => {
     setRegisteredPlayers(registeredPlayers.filter(
@@ -39,7 +44,16 @@ export default function PlayersSection(props: PlayersComponentProps) {
     setRegisteredPlayers([...registeredPlayers, player]);
   };
 
+  const generateTeams = () => {
+    const signedUpPlayers = registeredPlayers.reduce((acc: Array<Player>, cur) => {
+      if ( cur.comingToSession=== true ) {
+        acc.push(cur);
+      }
+      return acc;
+    }, []);
 
+    setGeneratedTeam(formulateTeams(signedUpPlayers, numOfTeams, numOfTiers));
+  };
 
   const PlayerPoolView = () => {
     // player pool and session players both rely on registeredPlayers as their source of truth.
@@ -75,8 +89,7 @@ export default function PlayersSection(props: PlayersComponentProps) {
     return signedUpPlayers.length < 1 
       ? (<div className='rounded-lg p-5 my-3 bg-red-200'>
         <p>No players added to upcoming session.</p>
-        <p> Click the add icon in the player
-          pool to add players for the next session. The teams are generated out of these players.</p>
+        <p> Click the add icon in the player pool to add players for the next session. The teams are generated out of these players.</p>
       </div>)
       : (<div className='rounded-lg p-5 my-3 bg-sky-200'>
         <h2 className='text-2xl'>Players coming this session</h2>
@@ -85,12 +98,23 @@ export default function PlayersSection(props: PlayersComponentProps) {
           (p) => <PlayerChip key={`${p.name}${p.skillTier}`}player={p} onClickRemove={togglePlayerComingToSession} onModifyPlayer={handlePlayerModify}/>)}
         </div>
         <div className=''> <p className='text-right' >Session players: {signedUpPlayers.length} / {registeredPlayers.length}</p> </div>
+        <Button variant="contained"
+          startIcon={<PersonAddIcon />} 
+          disabled={(signedUpPlayers.length/numOfTeams)<= 1} 
+          onClick={generateTeams} >
+        Generate teams
+        </Button>
       </div>);
+  };
+
+  const generatedTeamsView = () => {
+    return <AllTeamsView teams={generatedTeam} />;
   };
 
   return (
     <div className='p-1'>
-      
+
+      {generatedTeamsView()}
       {SessionPlayerView()}
       {PlayerPoolView()}
       <AddPlayerDialog 

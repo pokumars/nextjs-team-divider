@@ -3,7 +3,6 @@
 import GameConfigSection from '@/Sections/GameConfigSection';
 import PlayersSection from '@/Sections/PlayersSection';
 import { GameConfig } from '@/types/GameConfig';
-import { Player } from '@/types/Player';
 import { generateGameConfigSchema } from '@/utils/schemas';
 // import { testPlayers } from '@/utils/constants';
 import { useState } from 'react';
@@ -13,11 +12,11 @@ const defaultGameConfigErrors = { numOfTeams: true, numOfTeamsErrMsg: ' ', numOf
 
 
 export default function Home() {
-  const [gameConfigValues, setGameConfigValues] = useState<GameConfig>({ numOfTeams: 2, numOfTiers: 3 });
+  const [gameConfigValues, setGameConfigValues] = useState<GameConfig>({ numOfTeams: 2, numOfTiers: 5 }); // TODO: put in state manager
   const [gameConfigErrors, setGameConfigErrors] = useState<typeof defaultGameConfigErrors>(defaultGameConfigErrors);
   
 
-  const handleGameConfigValueChange= async (fieldName: string, value: number ) => {
+  const handleGameConfigValueChange= (fieldName: string, value: number ) => {
     // keyof typeof gameConfigValues is equivalent to GameConfig. i.e keyof typeof an OBJECT is equivalent to keyof the TYPE
     const configSchema = generateGameConfigSchema();
     const newGameConfigValues= { ...gameConfigValues, [fieldName]: value };
@@ -25,7 +24,6 @@ export default function Home() {
 
     configSchema.validate(newGameConfigValues, { abortEarly: false }).then((res) => {
       // No validation errors, clear the errors and set isValid to true
-      console.log('res of validate then', res);
       setGameConfigErrors({ ...defaultGameConfigErrors });
     }).catch((err: ValidationError) => {
       // https://github.com/jquense/yup?tab=readme-ov-file#validationerrorerrors-string--arraystring-value-any-path-string
@@ -45,7 +43,7 @@ export default function Home() {
         gameConfigValues={gameConfigValues}
         onChangeGameConfigValues={handleGameConfigValueChange}
         gameConfigErrors={gameConfigErrors}
-      />
+      />     
       <PlayersSection 
         numOfTiers={gameConfigValues.numOfTiers}
         numOfTeams={gameConfigValues.numOfTeams}

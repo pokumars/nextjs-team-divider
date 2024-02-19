@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import CloseIcon from '@mui/icons-material/Close';
-import { Button, IconButton, Typography } from '@mui/material';
+import { IconButton } from '@mui/material';
 import ModifyPlayerDialog from './ModifyPlayerDialog';
 
 interface PlayerListChipProps {
@@ -32,7 +32,7 @@ export default function PlayerChip({ player, onClickDelete, onModifyPlayer, onCl
 
   const renderDeleteIconButton = () => {
     return (
-      <IconButton aria-label="delete" onClick={() => onClickDelete && onClickDelete(player)} color='error' >
+      <IconButton aria-label="delete from our records" onClick={() => onClickDelete && onClickDelete(player)} color='error' >
         <DeleteIcon />
       </IconButton>
     );
@@ -40,7 +40,7 @@ export default function PlayerChip({ player, onClickDelete, onModifyPlayer, onCl
 
   const renderAddIconButton = () => {
     return (
-      <IconButton aria-label="delete" onClick={() => onClickComingToSession && onClickComingToSession(player)} color='default' >
+      <IconButton aria-label="add person to session" onClick={() => onClickComingToSession && onClickComingToSession(player)} color='default' >
         <PersonAddAltIcon />
       </IconButton>
     );
@@ -48,7 +48,7 @@ export default function PlayerChip({ player, onClickDelete, onModifyPlayer, onCl
 
   const renderRemoveIconButton = () => {
     return (
-      <IconButton aria-label="delete" onClick={() => onClickRemove && onClickRemove(player)} color='info' >
+      <IconButton aria-label="remove player from session" onClick={() => onClickRemove && onClickRemove(player)} color='info' >
         <CloseIcon />
       </IconButton>
     );

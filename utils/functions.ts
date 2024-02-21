@@ -43,9 +43,9 @@ const placePlayersInNGroupings = (numberOfTeams: number, players: Array<Player>)
   const playerGroupings: Player[][] = [];
   let forward: boolean = true; // 0 1 2 or 2 1 0
   for (let index = 0; index < players.length; index++) {
-    const currentModuloValue=index % numberOfTeams;
-    const zigZagIndex = forward? currentModuloValue : Math.abs(currentModuloValue - (numberOfTeams - 1));
-    // console.log(`${currentModuloValue} ${zigZagIndex}`);
+    const currentModuloValue=index % numberOfTeams; // 0 1 0 1 0 1
+    const zigZagIndex = forward? currentModuloValue : Math.abs(currentModuloValue - (numberOfTeams - 1)); // 0 1 1 0 0 1 1
+    //console.log(`${currentModuloValue} ${zigZagIndex}`);
 
     const curPlayer = players[index];
     /* e.g. if we have 10 players for 3 teams, 
@@ -62,7 +62,7 @@ const placePlayersInNGroupings = (numberOfTeams: number, players: Array<Player>)
     if (!playerGroupings[currentModuloValue]) {
       playerGroupings.push([curPlayer]);
     } else{
-      playerGroupings[currentModuloValue].push(curPlayer);
+      playerGroupings[zigZagIndex].push(curPlayer);
     }
 
     if(currentModuloValue === (numberOfTeams - 1)) {
@@ -135,6 +135,13 @@ const shuffle = (arr: any[]): any[] => {
     arr[rand] = temp;
   }
   return arr;
+};
+
+export const teamsToString= (teams: Teams): string => {
+  return teams.map((t) => `Team ${t.teamName}
+${t.teamPlayers.map(p => p.name).join('\n')}
+
+`).join('');
 };
 
 //formulateTeams(testPlayers, 2, 5);

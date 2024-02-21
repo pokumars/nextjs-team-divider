@@ -7,7 +7,7 @@ type TeamViewProps = {
 
 export const TeamView = ({ team }: TeamViewProps) => {
   return (
-    <div className='p-5 pb-5 mr-2 rounded-lg bg-sky-200'>
+    <div className='p-5 pb-5 mr-2 mt-2 rounded-lg bg-sky-200'>
       <h3 className='text-xl mb-2' >Team {team.teamName}</h3>
       <ul className='mb-4'>
         {team.teamPlayers.map(p => <li key={p.id} >{p.name} {p.skillTier}</li>)}

@@ -48,7 +48,7 @@ export default function ModifyPlayerDialog(props: ModifyPlayerDialogProps) {
     // TODO: pass down dynamic skill level
     const playerSchema = generatePlayerConfigSchema(5);
     const newPlayerValue = { ...playerValue,  [fieldName]: value };
-    setPlayerValue(newPlayerValue);
+    setPlayerValue(playerSchema.cast(newPlayerValue)); // cast because updating the numerical value turns them to strings
     setDisableDoneBtn(false);
 
     playerSchema.validate(newPlayerValue,  { abortEarly: false }).then((res) => {

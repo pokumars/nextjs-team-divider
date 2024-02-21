@@ -27,4 +27,4 @@ export const testPlayers: Player[]= [
 ];
 
 
-export const teamNames = ['black ⚫',' white ⚪', 'blue 🔵', 'red 🔴', 'green 🟢', 'yellow 🟡', 'orange 🟠', 'purple 🟣', 'pink', 'brown'];
+export const teamNames = ['Black ⚫', 'White ⚪', 'Blue 🔵', 'Red 🔴', 'Green 🟢', 'Yellow 🟡', 'Orange 🟠', 'Purple 🟣', 'Pink', 'Brown'];

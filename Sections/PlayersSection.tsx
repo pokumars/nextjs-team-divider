@@ -7,6 +7,7 @@ import { testPlayers } from '@/utils/constants';
 import { Button } from '@mui/material';
 import { formulateTeams } from '@/utils/functions';
 import { AllTeamsView } from '@/components/AllTeamsView';
+import { CustomWarning } from '@/components/CustomWarning';
 
 interface PlayersComponentProps {
   numOfTiers: number;
@@ -44,14 +45,16 @@ export default function PlayersSection(props: PlayersComponentProps) {
     setRegisteredPlayers([...registeredPlayers, player]);
   };
 
-  const generateTeams = () => {
-    const signedUpPlayers = registeredPlayers.reduce((acc: Array<Player>, cur) => {
-      if ( cur.comingToSession=== true ) {
-        acc.push(cur);
-      }
-      return acc;
-    }, []);
+  const signedUpPlayers = registeredPlayers.reduce((acc: Array<Player>, cur) => {
+    if ( cur.comingToSession=== true ) {
+      // set any player tier above max to be equal to max. This is for cases when the user changes the max skillTier to something lower than what some existing players have
+      const p = { ...cur, skillTier: cur.skillTier > numOfTiers? numOfTiers : cur.skillTier };
+      acc.push(p);
+    }
+    return acc;
+  }, []);
 
+  const generateTeams = () => {
     setGeneratedTeam(formulateTeams(signedUpPlayers, numOfTeams, numOfTiers));
   };
 
@@ -63,6 +66,7 @@ export default function PlayersSection(props: PlayersComponentProps) {
       }
       return acc;
     }, []);
+    // TODO: have a warning here that the number of tiers is lower than the highest skill tier of some players.
 
     return registeredPlayers.length < 1 
       ? (<div className='rounded-lg p-5 my-3 bg-red-200'>
@@ -71,6 +75,8 @@ export default function PlayersSection(props: PlayersComponentProps) {
       : (<div className='rounded-lg p-5 my-3 bg-sky-200'>
         <h2 className='text-2xl'>Player Pool</h2>
         <p>These are the players who are part of your group and may sign up to a session</p>
+        {registeredPlayers.some((p) => p.skillTier > numOfTiers) && <CustomWarning text='The "number of tiers" is lower than the skill tier of some players. This may cause inexplicable behavior'/>}
+        
         <div>{poolPlayers.map(
           (p) => <PlayerChip key={`${p.name}${p.skillTier}`}player={p} onClickDelete={handlePlayerDelete} onClickComingToSession={togglePlayerComingToSession} onModifyPlayer={handlePlayerModify}/>)}
         </div>
@@ -78,14 +84,9 @@ export default function PlayersSection(props: PlayersComponentProps) {
       </div>);
   };
 
-  const SessionPlayerView = () => {
-    const signedUpPlayers = registeredPlayers.reduce((acc: Array<Player>, cur) => {
-      if ( cur.comingToSession=== true ) {
-        acc.push(cur);
-      }
-      return acc;
-    }, []);
 
+
+  const SessionPlayerView = () => {
     return signedUpPlayers.length < 1 
       ? (<div className='rounded-lg p-5 my-3 bg-red-200'>
         <p>No players added to upcoming session.</p>
@@ -94,6 +95,7 @@ export default function PlayersSection(props: PlayersComponentProps) {
       : (<div className='rounded-lg p-5 my-3 bg-sky-200'>
         <h2 className='text-2xl'>Players coming this session</h2>
         <p>These are the players who are coming to the upcoming session.</p>
+        {registeredPlayers.some((p) => p.skillTier > numOfTiers) && <CustomWarning text='The "number of tiers" is lower than the skill tier of some players. This may cause inexplicable behavior'/>}
         <div>{signedUpPlayers.map(
           (p) => <PlayerChip key={`${p.name}${p.skillTier}`}player={p} onClickRemove={togglePlayerComingToSession} onModifyPlayer={handlePlayerModify}/>)}
         </div>
